@@ -1,0 +1,388 @@
+// ─────────────────────────────────────────────────────────────
+// SINGLE SOURCE OF TRUTH for all portfolio content.
+// Edit this file to update names, links, projects, and experience.
+// ─────────────────────────────────────────────────────────────
+
+export const profile = {
+  name: 'Sunny Kushwaha',
+  role: 'AI Full-Stack Architect',
+  subRole: 'Senior Lead Engineer · Generative AI · Cloud',
+  tagline:
+    'I design and build production-grade AI platforms — Enterprise RAG systems, agentic AI workflows, and MCP gateway architectures that move organizations from GenAI experiments to governed, scalable AI products.',
+  location: 'India',
+  email: 'sunny.kush2k8@gmail.com',
+  github: 'https://github.com/sunny-dev007',
+  githubUser: 'sunny-dev007',
+  linkedin: 'https://www.linkedin.com/in/sunny-kushwaha-genai',
+  // Update this number to match your actual experience.
+  yearsOfExperience: '10+',
+  resumeHighlights: [
+    { value: '10+', label: 'Years Engineering' },
+    { value: '15+', label: 'AI POCs & Platforms' },
+    { value: '4+', label: 'Domains: BFSI · Health · FinOps' },
+    { value: '2', label: 'Clouds (Azure · AWS)' },
+  ],
+}
+
+export const about = {
+  heading: 'Architecting the bridge between LLMs and the Enterprise',
+  paragraphs: [
+    `I am a Senior Lead Engineer with deep full-stack, cloud, and distributed-systems experience, now specializing in Generative AI architecture. My focus is the hard part of enterprise AI — not the demo, but the production system: retrieval quality, grounding, evaluation, cost control, security, and governance.`,
+    `I work across the entire AI stack — from React/TypeScript front-ends and Node.js microservices, through event-driven backbones on Kafka, to Azure OpenAI, hybrid retrieval pipelines, vector databases (Qdrant, Pinecone, Weaviate, Azure AI Search), and Model Context Protocol (MCP) integration layers.`,
+    `My goal in every engagement is the same: turn Generative AI from an isolated proof-of-concept into a governed, observable, cost-efficient platform capability that product teams can build on.`,
+  ],
+  focusAreas: [
+    'Enterprise RAG & Hybrid Retrieval',
+    'Agentic AI & Multi-Agent Orchestration',
+    'MCP Gateway & Tooling Architecture',
+    'LLMOps: Evaluation, Guardrails, Observability',
+    'Cloud-Native & Event-Driven Platforms',
+    'Engineering Leadership & Mentoring',
+  ],
+}
+
+export interface ExpertisePillar {
+  icon: string
+  title: string
+  description: string
+  points: string[]
+}
+
+export const expertise: ExpertisePillar[] = [
+  {
+    icon: '◈',
+    title: 'Enterprise RAG Architecture',
+    description:
+      'End-to-end retrieval-augmented generation platforms designed for accuracy, traceability, and scale.',
+    points: [
+      'Hybrid retrieval: dense vectors + BM25 + reranking',
+      'Chunking & embedding strategy per document domain',
+      'Grounded citations, hallucination controls, eval harnesses',
+      'Qdrant · Pinecone · Weaviate · Azure AI Search',
+    ],
+  },
+  {
+    icon: '⬡',
+    title: 'Agentic AI Systems',
+    description:
+      'Multi-agent workflows that plan, call tools, and recover from failure — with humans in the loop where it matters.',
+    points: [
+      'Planner / executor / critic agent topologies',
+      'Tool-use orchestration with structured outputs',
+      'Human-in-the-loop approval gates for sensitive actions',
+      'Stateful workflows with retries, timeouts, fallbacks',
+    ],
+  },
+  {
+    icon: '⛁',
+    title: 'MCP & Integration Architecture',
+    description:
+      'Model Context Protocol gateways that expose enterprise systems to LLMs safely and consistently.',
+    points: [
+      'MCP server design: tools, resources, prompts',
+      'Central gateway: authN/Z, rate limiting, audit trails',
+      'Tool registries and capability discovery',
+      'Zero-trust posture for LLM ↔ system access',
+    ],
+  },
+  {
+    icon: '☁',
+    title: 'Cloud-Native Platform Engineering',
+    description:
+      'The distributed-systems foundation that production AI workloads actually run on.',
+    points: [
+      'Azure & AWS: OpenAI, Functions, Lambda, AKS/EKS',
+      'Event-driven microservices on Kafka',
+      'IaC with Terraform · CI/CD with GitHub Actions',
+      'Observability, cost governance, autoscaling',
+    ],
+  },
+]
+
+/** Roles cycled by the hero typing animation. */
+export const heroRoles = [
+  'AI Full-Stack Architect',
+  'GenAI Solution Architect',
+  'Agentic AI Architect',
+  'Enterprise RAG Specialist',
+]
+
+/** Technologies scrolled in the marquee strip. */
+export const marqueeTech = [
+  'Azure OpenAI', 'MCP', 'Enterprise RAG', 'LangChain', 'Agentic AI',
+  'Qdrant', 'Pinecone', 'Azure AI Search', 'Graph RAG', 'Kafka',
+  'Kubernetes', 'Terraform', 'Node.js', 'TypeScript', 'React',
+  'Python', 'PostgreSQL', 'Redis', 'AWS', 'Azure',
+]
+
+export type ProjectGroup = 'rag' | 'agentic' | 'domain' | 'platform'
+
+export const projectFilters: { id: ProjectGroup | 'all'; label: string }[] = [
+  { id: 'all', label: 'All Systems' },
+  { id: 'rag', label: 'RAG & Retrieval' },
+  { id: 'agentic', label: 'Agentic AI' },
+  { id: 'domain', label: 'Domain Solutions' },
+  { id: 'platform', label: 'Platforms & Infra' },
+]
+
+export interface Project {
+  title: string
+  category: string
+  group: ProjectGroup
+  status: 'Production' | 'POC' | 'Platform' | 'Open Source'
+  description: string
+  architecture: string[]
+  stack: string[]
+  link?: string
+}
+
+export const projects: Project[] = [
+  {
+    title: 'AI Career Intelligence Platform',
+    category: 'MCP-Native AI Platform',
+    group: 'platform',
+    status: 'Open Source',
+    description:
+      'A personal AI platform exposed entirely through Model Context Protocol. Ingests career data (LinkedIn, codebases, documents), builds an evidence-grounded skill graph, and serves 20+ MCP tools for skill-gap analysis, job matching, and career roadmap generation — consumable by any MCP-capable AI client.',
+    architecture: [
+      'MCP server exposing 20+ tools over a cloud runtime',
+      'Ingestion pipeline → chunking → embeddings → vector index',
+      'Evidence-scored skill graph with confidence levels',
+      'RAG-backed retrieval for every analytical answer',
+    ],
+    stack: ['TypeScript', 'Node.js', 'MCP', 'Embeddings', 'Vector DB', 'Azure'],
+    link: 'https://github.com/sunny-dev007',
+  },
+  {
+    title: 'FinOps AI Intelligence Platform',
+    category: 'FinOps × GenAI',
+    group: 'domain',
+    status: 'Platform',
+    description:
+      'Cloud cost-intelligence platform that turns raw Azure/AWS billing telemetry into architect-grade decisions. Natural-language cost analytics over a RAG layer, ML-driven anomaly detection on spend streams, and an agentic recommendation engine that proposes rightsizing, reservation, and architecture changes — each with projected savings and a human approval gate.',
+    architecture: [
+      'Billing ingestion pipeline (Azure Cost Mgmt + AWS CUR) → Kafka → warehouse',
+      'Spend-anomaly detection with seasonality-aware forecasting',
+      'NL-to-insight: RAG over cost data, tagging policy & pricing docs',
+      'Agentic optimizer: rightsizing / RI / architecture proposals with ROI scoring',
+      'FinOps governance loop: approval workflow → change tracking → realized-savings audit',
+    ],
+    stack: ['Azure OpenAI', 'Python', 'Kafka', 'PostgreSQL', 'LangChain', 'React', 'Terraform'],
+  },
+  {
+    title: 'Research Hyper-Agentic Platform',
+    category: 'Multi-Agent Research',
+    group: 'agentic',
+    status: 'POC',
+    description:
+      'A deep-research engine where an orchestrator decomposes a research question and spawns a swarm of parallel specialist agents — retrievers, analysts, fact-checkers — that triangulate sources, challenge each other’s claims, and converge into a cited, publication-grade report. Built to answer questions no single RAG pass can.',
+    architecture: [
+      'Orchestrator → dynamic agent-graph spawning (parallel researcher swarm)',
+      'Dual retrieval: live web + internal corpus via MCP tool contracts',
+      'Adversarial verification: claim extraction → cross-source triangulation → critic agent',
+      'Convergence controller: budget-aware iteration with confidence thresholds',
+      'Report synthesis with inline citations and evidence-chain traceability',
+    ],
+    stack: ['MCP', 'Azure OpenAI', 'Node.js', 'TypeScript', 'Qdrant', 'Redis', 'Kafka'],
+  },
+  {
+    title: 'BFSI Conversational Intelligence Suite',
+    category: 'Banking · Regulated AI',
+    group: 'domain',
+    status: 'Production',
+    description:
+      'Conversational AI for a banking environment where a wrong answer is a compliance event. Customer- and advisor-facing assistants grounded in product policies, regulatory circulars, and account context — wrapped in the guardrail architecture regulated industries demand: PII redaction, deterministic escalation, and a complete audit trail of every generated token.',
+    architecture: [
+      'Policy-grounded RAG over product T&Cs, KYC/AML rules, regulatory circulars',
+      'PII detection & redaction at ingress and egress (pre-LLM and post-LLM)',
+      'Intent router: deterministic flows for transactions, LLM only for knowledge',
+      'Compliance guardrails: restricted-advice classifier + human escalation paths',
+      'Immutable audit log: prompt, context, response, and citation per interaction',
+    ],
+    stack: ['Azure OpenAI', 'Azure AI Search', 'Node.js', 'PostgreSQL', 'Redis', 'OAuth 2.0'],
+  },
+  {
+    title: 'Clinical Knowledge Copilot',
+    category: 'Healthcare · Clinical AI',
+    group: 'domain',
+    status: 'POC',
+    description:
+      'Clinician-facing copilot that summarizes patient documentation and answers questions against clinical guidelines — designed PHI-first. Every response is grounded in versioned medical sources, mapped to standard terminologies, and framed as decision support, never diagnosis: the clinician stays the final authority in the loop.',
+    architecture: [
+      'PHI-safe pipeline: de-identification before any LLM call, re-identification at render',
+      'RAG over versioned clinical guidelines with recency & source-authority ranking',
+      'Terminology grounding: ICD-10 / SNOMED CT entity mapping on both query and answer',
+      'Structured summarization of encounter notes with traceable source spans',
+      'Clinician-in-the-loop UX: confidence display, evidence panel, one-click verification',
+    ],
+    stack: ['Azure OpenAI', 'Python', 'Embeddings', 'Qdrant', 'React', 'PostgreSQL'],
+  },
+  {
+    title: 'Enterprise RAG Knowledge Platform',
+    category: 'Retrieval Architecture',
+    group: 'rag',
+    status: 'Production',
+    description:
+      'Organization-wide knowledge assistant over unstructured enterprise content. Designed the full retrieval architecture: domain-aware chunking, hybrid retrieval (dense + keyword + reranker), grounded citations, and an evaluation harness measuring answer faithfulness and retrieval precision before every release.',
+    architecture: [
+      'Hybrid retrieval: vector search + BM25 + cross-encoder rerank',
+      'Metadata filtering & document-level ACL enforcement',
+      'Citation-grounded responses with hallucination guardrails',
+      'Offline + online eval loops (faithfulness, precision, latency)',
+    ],
+    stack: ['Azure OpenAI', 'Azure AI Search', 'Qdrant', 'Node.js', 'LangChain', 'Redis'],
+  },
+  {
+    title: 'Enterprise MCP Gateway',
+    category: 'Integration Architecture',
+    group: 'platform',
+    status: 'Platform',
+    description:
+      'A centralized Model Context Protocol gateway that lets LLM applications access internal systems (APIs, databases, documents) through one governed entry point — solving the N×M integration problem between AI clients and enterprise tools.',
+    architecture: [
+      'Single gateway fronting multiple domain MCP servers',
+      'OAuth-based authN/Z with per-tool authorization scopes',
+      'Central audit log of every tool invocation',
+      'Rate limiting, schema validation, and PII redaction at the edge',
+    ],
+    stack: ['MCP', 'TypeScript', 'Node.js', 'OAuth 2.0', 'PostgreSQL', 'Docker'],
+  },
+  {
+    title: 'Agentic Workflow Orchestrator',
+    category: 'Agentic AI',
+    group: 'agentic',
+    status: 'POC',
+    description:
+      'Multi-agent system automating a complex business workflow end-to-end: a planner agent decomposes the request, specialist agents execute with tool access, and a critic agent validates output quality — with human approval gates before any irreversible action.',
+    architecture: [
+      'Planner → specialist → critic agent topology',
+      'Structured tool-calling with typed contracts (JSON Schema)',
+      'Durable state machine: retries, timeouts, compensation',
+      'Human-in-the-loop checkpoints for sensitive operations',
+    ],
+    stack: ['Azure OpenAI', 'LangChain', 'Node.js', 'Kafka', 'Redis', 'TypeScript'],
+  },
+  {
+    title: 'Graph RAG Knowledge Engine',
+    category: 'Advanced Retrieval',
+    group: 'rag',
+    status: 'POC',
+    description:
+      'Retrieval engine combining a knowledge graph with vector embeddings to answer multi-hop questions plain RAG cannot — entity extraction builds the graph, community summaries provide global context, and hybrid graph+vector traversal grounds the answers.',
+    architecture: [
+      'LLM-driven entity & relationship extraction pipeline',
+      'Knowledge graph + community detection & summarization',
+      'Hybrid query routing: graph traversal vs. vector search',
+      'Multi-hop reasoning with explainable evidence paths',
+    ],
+    stack: ['Knowledge Graph', 'Embeddings', 'Python', 'Azure OpenAI', 'Qdrant'],
+  },
+  {
+    title: 'Event-Driven Microservices Backbone',
+    category: 'Distributed Systems',
+    group: 'platform',
+    status: 'Production',
+    description:
+      'The cloud-native foundation beneath the AI workloads: an event-driven microservices platform handling high-throughput business events with exactly-once semantics, saga-based consistency, and full observability — deployed via Terraform and GitHub Actions.',
+    architecture: [
+      'Kafka event backbone with schema registry',
+      'Saga pattern for distributed transactions',
+      'Kubernetes deployment with autoscaling (AKS)',
+      'Distributed tracing, metrics, and SLO-based alerting',
+    ],
+    stack: ['Node.js', 'Kafka', 'Kubernetes', 'Terraform', 'PostgreSQL', 'Azure'],
+  },
+]
+
+export interface SkillGroup {
+  title: string
+  skills: string[]
+}
+
+export const skillGroups: SkillGroup[] = [
+  {
+    title: 'Generative AI & LLM',
+    skills: [
+      'Azure OpenAI', 'OpenAI', 'LLM Architecture', 'Prompt Engineering',
+      'Enterprise RAG', 'Graph RAG', 'Hybrid Retrieval', 'Embeddings',
+      'Agentic AI', 'LangChain', 'MCP', 'LLM Evaluation & Guardrails',
+    ],
+  },
+  {
+    title: 'Vector & Data Layer',
+    skills: [
+      'Qdrant', 'Pinecone', 'Weaviate', 'Azure AI Search',
+      'PostgreSQL', 'Redis', 'Kafka', 'Knowledge Graphs',
+    ],
+  },
+  {
+    title: 'Languages & Frameworks',
+    skills: [
+      'TypeScript', 'JavaScript', 'Node.js', 'Python',
+      'React', 'Next.js', 'SQL', 'Vitest',
+    ],
+  },
+  {
+    title: 'Cloud, DevOps & Architecture',
+    skills: [
+      'Azure', 'AWS', 'Kubernetes', 'Docker', 'Terraform',
+      'Serverless / Lambda', 'GitHub Actions', 'CI/CD',
+      'Microservices', 'Event-Driven Architecture', 'System Design',
+    ],
+  },
+]
+
+export interface Experience {
+  role: string
+  company: string
+  period: string
+  summary: string
+  highlights: string[]
+}
+
+// NOTE: Company names are intentionally generic. Replace with real
+// employer names & exact dates when you are ready.
+export const experiences: Experience[] = [
+  {
+    role: 'Senior Lead Engineer — Generative AI',
+    company: 'Global IT Services & Consulting Firm',
+    period: 'Present',
+    summary:
+      'Leading Generative AI architecture and delivery for enterprise clients — owning solution design from retrieval strategy to production rollout.',
+    highlights: [
+      'Architected an enterprise RAG platform with hybrid retrieval and grounded citations, adopted across multiple business units',
+      'Designed an MCP gateway standardizing how LLM applications access internal systems with auth, audit, and rate controls',
+      'Led agentic AI POCs (planner/executor/critic topologies) and took the successful ones to production hardening',
+      'Mentor engineers on AI system design; define GenAI engineering standards, evaluation gates, and cost governance',
+    ],
+  },
+  {
+    role: 'Lead Full-Stack Engineer',
+    company: 'Enterprise Technology Organization',
+    period: 'Earlier',
+    summary:
+      'Owned end-to-end delivery of cloud-native products — from React front-ends to distributed Node.js backends on Azure and AWS.',
+    highlights: [
+      'Designed event-driven microservices on Kafka with saga-based consistency and exactly-once processing',
+      'Built and operated Kubernetes-based deployment platforms with Terraform IaC and GitHub Actions CI/CD',
+      'Drove system design reviews, performance engineering, and production reliability practices',
+    ],
+  },
+  {
+    role: 'Full-Stack Engineer',
+    company: 'Digital Solutions Company',
+    period: 'Earlier',
+    summary:
+      'Delivered full-stack web applications and REST platforms; built the distributed-systems foundation that later powered AI-era work.',
+    highlights: [
+      'Developed React + Node.js applications serving high-traffic production workloads',
+      'Designed relational data models and caching strategies (PostgreSQL, Redis)',
+      'Automated build, test, and deployment pipelines',
+    ],
+  },
+]
+
+export const contact = {
+  heading: 'Let’s build production-grade AI together',
+  body: 'Open to AI Architect, GenAI Architect, and AI Engineering leadership conversations. The fastest way to reach me is email or LinkedIn.',
+}
