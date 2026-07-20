@@ -9,7 +9,9 @@ export const profile = {
   subRole: 'Senior Lead Engineer · Generative AI · Cloud',
   tagline:
     'I design and build production-grade AI platforms — Enterprise RAG systems, agentic AI workflows, and MCP gateway architectures that move organizations from GenAI experiments to governed, scalable AI products.',
-  location: 'India',
+  location: 'Pune, India',
+  /** Drop your photo at portfolio/public/profile.jpg (this path). */
+  photo: './profile.jpg',
   email: 'sunny.kush2k8@gmail.com',
   github: 'https://github.com/sunny-dev007',
   githubUser: 'sunny-dev007',

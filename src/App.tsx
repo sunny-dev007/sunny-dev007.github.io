@@ -18,6 +18,29 @@ const NAV_ITEMS = [
   ['#experience', 'Experience'],
 ] as const
 
+/**
+ * Profile photo with animated gradient ring. Falls back to an "SK"
+ * monogram if public/profile.jpg is missing, so the layout never breaks.
+ */
+function Avatar({ size = 128, className = '' }: { size?: number; className?: string }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className={`avatar ${className}`} style={{ width: size, height: size }}>
+      <div className="avatar-ring" />
+      {failed ? (
+        <div className="avatar-fallback">SK</div>
+      ) : (
+        <img
+          src={profile.photo}
+          alt={`${profile.name} — ${profile.role}`}
+          onError={() => setFailed(true)}
+        />
+      )}
+      <span className="avatar-dot" title="Open to opportunities" />
+    </div>
+  )
+}
+
 /** Mouse-tracking spotlight for cards (sets CSS vars consumed by ::after). */
 function spotlight(e: MouseEvent<HTMLElement>) {
   const el = e.currentTarget
@@ -79,8 +102,11 @@ function Hero() {
     <section className="hero" id="top" ref={ref}>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <div className="hero-badge reveal visible">
-            <span className="pulse" /> Open to AI Architect &amp; GenAI leadership roles
+          <div className="hero-intro reveal visible">
+            <Avatar size={124} />
+            <div className="hero-badge">
+              <span className="pulse" /> Open to AI Architect &amp; GenAI leadership roles
+            </div>
           </div>
           <p className="hero-sub reveal visible">Hi, I&apos;m</p>
           <h1 className="reveal visible">{profile.name}</h1>
@@ -142,13 +168,30 @@ function About() {
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
-          <div className="focus-card spot reveal" onMouseMove={spotlight}>
-            <h3>Current Focus</h3>
-            <ul>
-              {about.focusAreas.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
+          <div className="about-side">
+            <div className="portrait-card reveal">
+              <img
+                src={profile.photo}
+                alt={`${profile.name}, ${profile.role}, based in ${profile.location}`}
+                onError={(e) => {
+                  e.currentTarget.closest<HTMLElement>('.portrait-card')!.style.display = 'none'
+                }}
+              />
+              <div className="portrait-caption">
+                <span className="portrait-name">{profile.name}</span>
+                <span className="portrait-role">{profile.subRole}</span>
+              </div>
+              <span className="portrait-chip loc">📍 {profile.location}</span>
+              <span className="portrait-chip role">◆ AI Architect</span>
+            </div>
+            <div className="focus-card spot reveal" onMouseMove={spotlight}>
+              <h3>Current Focus</h3>
+              <ul>
+                {about.focusAreas.map((f) => (
+                  <li key={f}>{f}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
