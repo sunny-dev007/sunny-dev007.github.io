@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import type { MouseEvent } from 'react'
 import {
   profile, about, expertise, projects, skillGroups, experiences, contact,
-  heroRoles, marqueeTech, projectFilters,
+  heroRoles, marqueeTech, projectFilters, achievements,
 } from './data'
 import type { ProjectGroup } from './data'
 import { useReveal, useTyped, useCountUp } from './hooks'
 import { GitHubIcon, LinkedInIcon, MailIcon, ArrowIcon } from './icons'
 import ArchDiagram from './ArchDiagram'
+import ProjectArt from './ProjectArt'
 
 const NAV_ITEMS = [
   ['#about', 'About'],
@@ -229,28 +230,32 @@ function Projects() {
         <div className="projects-grid">
           {visible.map((p) => (
             <article className="project spot reveal visible" key={p.title} onMouseMove={spotlight}>
-              <div className="project-top">
-                <span className="category">{p.category}</span>
-                <span className={`badge ${badgeClass[p.status]}`}>{p.status}</span>
+              <ProjectArt variant={p.art} />
+              <div className="project-body">
+                <div className="project-top">
+                  <span className="category">{p.category}</span>
+                  <span className={`badge ${badgeClass[p.status]}`}>{p.status}</span>
+                </div>
+                <h3>{p.title}</h3>
+                {p.meta && <div className="project-meta">{p.meta}</div>}
+                <p>{p.description}</p>
+                <ul className="arch">
+                  <li className="arch-label">Architecture Highlights</li>
+                  {p.architecture.map((a) => (
+                    <li key={a}>· {a}</li>
+                  ))}
+                </ul>
+                <div className="tags">
+                  {p.stack.map((t) => (
+                    <span className="tag" key={t}>{t}</span>
+                  ))}
+                </div>
+                {p.link && (
+                  <a className="project-link" href={p.link} target="_blank" rel="noreferrer">
+                    <GitHubIcon size={15} /> View on GitHub <ArrowIcon size={13} />
+                  </a>
+                )}
               </div>
-              <h3>{p.title}</h3>
-              <p>{p.description}</p>
-              <ul className="arch">
-                <li className="arch-label">Architecture Highlights</li>
-                {p.architecture.map((a) => (
-                  <li key={a}>· {a}</li>
-                ))}
-              </ul>
-              <div className="tags">
-                {p.stack.map((t) => (
-                  <span className="tag" key={t}>{t}</span>
-                ))}
-              </div>
-              {p.link && (
-                <a className="project-link" href={p.link} target="_blank" rel="noreferrer">
-                  View on GitHub <ArrowIcon size={13} />
-                </a>
-              )}
             </article>
           ))}
         </div>
@@ -295,12 +300,21 @@ function ExperienceSection() {
       <div className="container">
         <div className="kicker reveal">05 · Experience</div>
         <h2 className="section-title reveal">
-          Professional <span className="grad-text">Journey</span>
+          Career <span className="grad-text">Journey</span>
         </h2>
         <p className="section-sub reveal">
-          A progression from full-stack engineering to distributed systems to
-          Generative AI architecture leadership.
+          A decade-long progression from full-stack engineering to distributed systems
+          to Generative AI architecture leadership.
         </p>
+        <div className="ach-grid">
+          {achievements.map((a) => (
+            <div className="ach spot reveal" key={a.title} onMouseMove={spotlight}>
+              <div className="ach-icon">{a.icon}</div>
+              <h4>{a.title}</h4>
+              <p>{a.text}</p>
+            </div>
+          ))}
+        </div>
         <div className="timeline">
           {experiences.map((e) => (
             <div className="tl-item reveal" key={e.role}>
