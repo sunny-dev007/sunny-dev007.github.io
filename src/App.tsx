@@ -9,12 +9,13 @@ import { useReveal, useTyped, useCountUp } from './hooks'
 import { GitHubIcon, LinkedInIcon, MailIcon, ArrowIcon } from './icons'
 import ArchDiagram from './ArchDiagram'
 import ProjectArt from './ProjectArt'
+import { initAnalytics, trackEvent } from './analytics'
 
 const NAV_ITEMS = [
   ['#about', 'About'],
+  ['#skills', 'Tech Stack'],
   ['#expertise', 'Expertise'],
   ['#projects', 'Projects'],
-  ['#skills', 'Skills'],
   ['#experience', 'Experience'],
 ] as const
 
@@ -116,7 +117,7 @@ function Hero() {
           </div>
           <p className="tagline reveal visible">{profile.tagline}</p>
           <div className="hero-actions reveal visible">
-            <a className="btn btn-primary" href="#projects">
+            <a className="btn btn-primary" href="#projects" data-track="hero_view_work">
               View Architecture Work <ArrowIcon />
             </a>
             <a className="btn btn-ghost" href={profile.github} target="_blank" rel="noreferrer">
@@ -204,7 +205,7 @@ function Expertise() {
   return (
     <section id="expertise" ref={ref}>
       <div className="container">
-        <div className="kicker reveal">02 · Expertise</div>
+        <div className="kicker reveal">03 · Expertise</div>
         <h2 className="section-title reveal">
           Architecture <span className="grad-text">Pillars</span>
         </h2>
@@ -246,7 +247,7 @@ function Projects() {
   return (
     <section id="projects" ref={ref}>
       <div className="container">
-        <div className="kicker reveal">03 · Projects</div>
+        <div className="kicker reveal">04 · Projects</div>
         <h2 className="section-title reveal">
           Architecture-Level <span className="grad-text">Projects &amp; POCs</span>
         </h2>
@@ -259,7 +260,10 @@ function Projects() {
             <button
               key={f.id}
               className={`filter-btn${filter === f.id ? ' active' : ''}`}
-              onClick={() => setFilter(f.id)}
+              onClick={() => {
+                setFilter(f.id)
+                trackEvent('project_filter', { filter: f.label })
+              }}
             >
               {f.label}
               <span className="count">
@@ -318,12 +322,13 @@ function Skills() {
   return (
     <section id="skills" ref={ref}>
       <div className="container">
-        <div className="kicker reveal">04 · Skills</div>
+        <div className="kicker reveal">02 · Tech Stack</div>
         <h2 className="section-title reveal">
           Technology <span className="grad-text">Stack</span>
         </h2>
         <p className="section-sub reveal">
-          Full-stack depth with an AI-first architecture focus.
+          Full-stack depth with an AI-first architecture focus — the stack I ship
+          with today, aligned to what the market is hiring for.
         </p>
         <div className="skills-grid">
           {skillGroups.map((g) => (
@@ -435,6 +440,9 @@ function Footer() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initAnalytics()
+  }, [])
   return (
     <>
       <div className="bg-ambient" />
@@ -447,9 +455,9 @@ export default function App() {
         <Hero />
         <Marquee />
         <About />
+        <Skills />
         <Expertise />
         <Projects />
-        <Skills />
         <ExperienceSection />
         <Contact />
       </main>

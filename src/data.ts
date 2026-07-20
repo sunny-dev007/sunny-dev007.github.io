@@ -387,9 +387,10 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Generative AI & LLM',
     skills: [
-      'Azure OpenAI', 'AWS Bedrock', 'Google Gemini', 'OpenAI', 'LLM Architecture',
-      'Prompt Engineering', 'Enterprise RAG', 'Graph RAG', 'Hybrid Retrieval',
-      'Embeddings', 'Agentic AI', 'LangChain', 'LangGraph', 'MCP',
+      'Azure OpenAI', 'AWS Bedrock', 'Google Gemini', 'Azure AI Foundry',
+      'LLM Architecture', 'Prompt Engineering', 'Enterprise RAG', 'Graph RAG',
+      'Hybrid Retrieval', 'Embeddings & Semantic Search', 'Agentic AI',
+      'LangChain', 'LangGraph', 'MCP', 'Copilot Development',
       'LLM Evaluation & Guardrails', 'Multi-LLM Routing',
     ],
   },
@@ -405,23 +406,25 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Vector & Data Layer',
     skills: [
-      'Qdrant', 'Pinecone', 'Weaviate', 'Azure AI Search',
-      'PostgreSQL', 'Redis', 'Kafka', 'Knowledge Graphs',
+      'Weaviate', 'Qdrant', 'Pinecone', 'FAISS', 'Azure AI Search',
+      'PostgreSQL', 'MySQL', 'Azure SQL', 'DynamoDB', 'Redis',
+      'Kafka', 'Knowledge Graphs',
     ],
   },
   {
     title: 'Languages & Frameworks',
     skills: [
-      'TypeScript', 'JavaScript', 'Node.js', 'Python',
-      'React', 'Next.js', 'SQL', 'Vitest',
+      'TypeScript', 'JavaScript', 'Node.js', 'Python', 'React',
+      'Next.js', 'Express.js', 'REST APIs', 'GraphQL', 'SQL', 'Vitest',
     ],
   },
   {
     title: 'Cloud, DevOps & Architecture',
     skills: [
       'Azure', 'AWS', 'Kubernetes', 'Docker', 'Terraform',
-      'Serverless / Lambda', 'GitHub Actions', 'CI/CD',
-      'Microservices', 'Event-Driven Architecture', 'System Design',
+      'Serverless / Lambda', 'Azure Functions', 'GitHub Actions',
+      'Azure DevOps', 'CI/CD', 'Microservices',
+      'Event-Driven Architecture', 'System Design', 'API Gateway',
     ],
   },
 ]
@@ -504,6 +507,17 @@ export const achievements: Achievement[] = [
     text: 'Recognized by client and leadership for end-to-end ownership, key architecture decisions, and critical production releases under tight timelines.',
   },
 ]
+
+/**
+ * Visitor & click analytics (Google Analytics 4).
+ * 1. Create a free GA4 property at https://analytics.google.com
+ *    (Admin → Create property → Web stream for https://sunny-dev007.github.io)
+ * 2. Paste the "G-XXXXXXXXXX" Measurement ID below and push.
+ * Leave empty ('') and all tracking is disabled — zero scripts loaded.
+ */
+export const analyticsConfig = {
+  gaMeasurementId: '',
+}
 
 export const contact = {
   heading: 'Let’s build production-grade AI together',

@@ -78,6 +78,28 @@ git add . && git commit -m "Update content" && git push
 
 The site redeploys automatically.
 
+## 📊 Visitor & click analytics (free, ~5 min setup)
+
+The site ships with a built-in Google Analytics 4 integration that is
+**disabled until you add your Measurement ID** (no scripts load, no cookies).
+
+1. Go to https://analytics.google.com → **Admin → Create → Property**
+2. Add a **Web** data stream with URL `https://sunny-dev007.github.io`
+3. Copy the **Measurement ID** (looks like `G-XXXXXXXXXX`)
+4. Paste it into `src/data.ts` → `analyticsConfig.gaMeasurementId`, then push
+
+**What you'll see** (at analytics.google.com):
+- **Realtime / Reports → Engagement**: visitors, country, device, referrer
+  (e.g. "came from LinkedIn"), pages, session time
+- **Engagement → Events**: custom events tracked automatically —
+  - `portfolio_click` — every GitHub / LinkedIn / email / project-link click
+  - `project_filter` — which project filter chips visitors use
+  - `section_view` — which sections visitors actually scroll to
+
+Prefer a no-Google option? [GoatCounter](https://www.goatcounter.com) (free,
+no cookies) or [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/)
+are drop-in alternatives — ask and the integration can be swapped.
+
 ## 🆓 Alternative free hosts (also zero cost)
 
 | Host | How | URL style |
