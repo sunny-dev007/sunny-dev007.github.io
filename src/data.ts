@@ -37,7 +37,9 @@ export const about = {
     'Enterprise RAG & Hybrid Retrieval',
     'Agentic AI & Multi-Agent Orchestration',
     'MCP Gateway & Tooling Architecture',
-    'LLMOps: Evaluation, Guardrails, Observability',
+    'Responsible AI · NIST AI RMF · EU AI Act Compliance',
+    'LLM Security (OWASP LLM Top 10) & Guardrails',
+    'Multi-LLM Strategy: Azure OpenAI · AWS Bedrock · Gemini',
     'Cloud-Native & Event-Driven Platforms',
     'Engineering Leadership & Mentoring',
   ],
@@ -93,7 +95,8 @@ export const expertise: ExpertisePillar[] = [
     description:
       'The distributed-systems foundation that production AI workloads actually run on.',
     points: [
-      'Azure & AWS: OpenAI, Functions, Lambda, AKS/EKS',
+      'Multi-LLM: Azure OpenAI · AWS Bedrock · Google Gemini',
+      'Azure & AWS: Functions, Lambda, AKS/EKS',
       'Event-driven microservices on Kafka',
       'IaC with Terraform · CI/CD with GitHub Actions',
       'Observability, cost governance, autoscaling',
@@ -111,10 +114,11 @@ export const heroRoles = [
 
 /** Technologies scrolled in the marquee strip. */
 export const marqueeTech = [
-  'Azure OpenAI', 'MCP', 'Enterprise RAG', 'LangChain', 'Agentic AI',
-  'Qdrant', 'Pinecone', 'Azure AI Search', 'Graph RAG', 'Kafka',
-  'Kubernetes', 'Terraform', 'Node.js', 'TypeScript', 'React',
-  'Python', 'PostgreSQL', 'Redis', 'AWS', 'Azure',
+  'Azure OpenAI', 'AWS Bedrock', 'Google Gemini', 'MCP', 'Enterprise RAG',
+  'Responsible AI', 'NIST AI RMF', 'OWASP LLM Top 10', 'LangChain', 'LangGraph',
+  'Agentic AI', 'Qdrant', 'Weaviate', 'Azure AI Search', 'Graph RAG',
+  'Kafka', 'Kubernetes', 'Terraform', 'OpenTelemetry', 'Node.js',
+  'TypeScript', 'React', 'Python', 'AWS', 'Azure',
 ]
 
 export type ProjectGroup = 'rag' | 'agentic' | 'domain' | 'platform'
@@ -129,7 +133,7 @@ export const projectFilters: { id: ProjectGroup | 'all'; label: string }[] = [
 
 export type ProjectArtVariant =
   | 'docs' | 'finops' | 'career' | 'research' | 'bank'
-  | 'health' | 'gateway' | 'agents' | 'graph' | 'events'
+  | 'health' | 'gateway' | 'agents' | 'graph' | 'events' | 'security'
 
 export interface Project {
   title: string
@@ -141,6 +145,8 @@ export interface Project {
   art: ProjectArtVariant
   description: string
   architecture: string[]
+  /** The architect-level "why": a key design trade-off and its rationale. */
+  tradeoff?: string
   stack: string[]
   link?: string
 }
@@ -161,8 +167,11 @@ export const projects: Project[] = [
       'GenAI workflows: summarization, contextual Q&A, SOW-to-survey generation',
       'Conversational agents for survey intake and IDI (interview) simulation',
       'LLM orchestration with prompt engineering and cost/latency optimization',
+      'Responsible AI gates: grounded citations, PII masking, answer-faithfulness evaluation pre-release',
     ],
-    stack: ['Azure OpenAI', 'Weaviate', 'Node.js', 'Python', 'Azure SQL', 'Blob Storage'],
+    tradeoff:
+      'Chose hybrid BM25 + vector retrieval over pure vector — extra index complexity, but measurably higher recall on domain-specific jargon that embeddings alone miss.',
+    stack: ['Azure OpenAI', 'Weaviate', 'Node.js', 'Python', 'Azure SQL', 'LLM Evals', 'Blob Storage'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -180,8 +189,31 @@ export const projects: Project[] = [
       'LLM-driven CI/CD analysis: bottleneck identification and automated pipeline optimization',
       'Terraform IaC + GitHub Actions cutting deployment time and manual effort by 50%+',
       'Kubernetes architecture with auto-scaling; event-driven monitoring for HA and observability',
+      'Multi-cloud LLM strategy: Azure OpenAI primary, AWS Bedrock for AWS-resident workloads (data gravity)',
     ],
-    stack: ['Azure OpenAI', 'AWS', 'Terraform', 'Kubernetes', 'Node.js', 'Python', 'GitHub Actions'],
+    tradeoff:
+      'Event-driven anomaly detection over nightly batch reports — higher infra cost, but savings actions land before the bill does, not after.',
+    stack: ['Azure OpenAI', 'AWS Bedrock', 'Terraform', 'Kubernetes', 'Node.js', 'Python', 'GitHub Actions'],
+    link: 'https://github.com/sunny-dev007',
+  },
+  {
+    title: 'Responsible AI & LLM Security Governance Platform',
+    category: 'AI Governance · LLM Security',
+    group: 'platform',
+    status: 'Platform',
+    art: 'security',
+    description:
+      'The guardrail layer that makes every GenAI workload safe, compliant, and auditable by default. A central policy engine enforces Responsible AI controls — content safety, PII protection, bias and hallucination evaluation, automated red-teaming — mapped to NIST AI RMF, EU AI Act, and ISO/IEC 42001, so governance is architecture, not paperwork.',
+    architecture: [
+      'LLM firewall at the edge: prompt-injection & jailbreak detection, output filtering (OWASP LLM Top 10)',
+      'Policy-as-code guardrails: Azure AI Content Safety + AWS Bedrock Guardrails behind one abstraction',
+      'Continuous evaluation: hallucination/faithfulness scoring, bias probes, automated red-team suites per release',
+      'Compliance mapping: NIST AI RMF + EU AI Act risk tiers; model cards & decision logs per deployment',
+      'Full-trace LLM observability: OpenTelemetry GenAI spans — prompt, context, cost, latency per request',
+    ],
+    tradeoff:
+      'Centralized guardrails add ~120 ms latency vs. per-app controls — accepted for uniform policy enforcement, a single audit surface, and faster compliance sign-off.',
+    stack: ['NIST AI RMF', 'OWASP LLM Top 10', 'Azure AI Content Safety', 'AWS Bedrock', 'Google Gemini', 'Python', 'OpenTelemetry'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -198,8 +230,11 @@ export const projects: Project[] = [
       'Adversarial verification: claim extraction → cross-source triangulation → critic agent',
       'Convergence controller: budget-aware iteration with confidence thresholds',
       'Report synthesis with inline citations and evidence-chain traceability',
+      'Multi-model routing: GPT-4o, Claude & Google Gemini selected per agent role on cost/quality benchmarks',
     ],
-    stack: ['MCP', 'Azure OpenAI', 'Node.js', 'TypeScript', 'Qdrant', 'Redis', 'Kafka'],
+    tradeoff:
+      'Parallel agent swarm over a single deep-research loop — 3–4× token spend, bought back through cross-model verification that slashes hallucinated citations.',
+    stack: ['MCP', 'Azure OpenAI', 'Google Gemini', 'Node.js', 'TypeScript', 'Qdrant', 'Redis', 'Kafka'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -216,8 +251,11 @@ export const projects: Project[] = [
       'Intent router: deterministic flows for transactions, LLM only for knowledge',
       'Compliance guardrails: restricted-advice classifier + human escalation paths',
       'Immutable audit log: prompt, context, response, and citation per interaction',
+      'Compliance by design: RBI & DPDP Act-aligned data handling, EU AI Act risk classification, model documentation',
     ],
-    stack: ['Azure OpenAI', 'Azure AI Search', 'Node.js', 'PostgreSQL', 'Redis', 'OAuth 2.0'],
+    tradeoff:
+      'Deterministic flows for anything transactional, LLM only for knowledge — sacrificed conversational flexibility because regulators require reproducible behavior.',
+    stack: ['Azure OpenAI', 'Azure AI Search', 'Node.js', 'PostgreSQL', 'Redis', 'OAuth 2.0', 'DPDP / EU AI Act'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -234,8 +272,11 @@ export const projects: Project[] = [
       'Terminology grounding: ICD-10 / SNOMED CT entity mapping on both query and answer',
       'Structured summarization of encounter notes with traceable source spans',
       'Clinician-in-the-loop UX: confidence display, evidence panel, one-click verification',
+      'Responsible AI: bias monitoring across patient cohorts, model cards, HIPAA-aligned PHI lifecycle',
     ],
-    stack: ['Azure OpenAI', 'Python', 'Embeddings', 'Qdrant', 'React', 'PostgreSQL'],
+    tradeoff:
+      'De-identify before every LLM call despite the latency tax — PHI never crosses the model boundary, which turned security review from blocker into formality.',
+    stack: ['Azure OpenAI', 'Python', 'Embeddings', 'Qdrant', 'React', 'PostgreSQL', 'HIPAA'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -268,8 +309,11 @@ export const projects: Project[] = [
       'OAuth-based authN/Z with per-tool authorization scopes',
       'Central audit log of every tool invocation',
       'Rate limiting, schema validation, and PII redaction at the edge',
+      'LLM security controls: prompt-injection screening, tool-permission sandboxing, output filtering (OWASP LLM Top 10)',
     ],
-    stack: ['MCP', 'TypeScript', 'Node.js', 'OAuth 2.0', 'PostgreSQL', 'Docker'],
+    tradeoff:
+      'One governed gateway over per-team integrations — a single point to harden and audit, accepted as a scaling bottleneck mitigated with horizontal replicas.',
+    stack: ['MCP', 'TypeScript', 'Node.js', 'OAuth 2.0', 'PostgreSQL', 'Docker', 'OWASP LLM Top 10'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -285,8 +329,11 @@ export const projects: Project[] = [
       'Structured tool-calling with typed contracts (JSON Schema)',
       'Durable state machine: retries, timeouts, compensation',
       'Human-in-the-loop checkpoints for sensitive operations',
+      'Guardrailed autonomy: action allow-lists, spend budgets, and full agent-trace observability',
     ],
-    stack: ['Azure OpenAI', 'LangChain', 'Node.js', 'Kafka', 'Redis', 'TypeScript'],
+    tradeoff:
+      'Durable state machine over free-form agent loops — less emergent “magic,” but bounded autonomy is what makes agents production-deployable.',
+    stack: ['Azure OpenAI', 'LangChain', 'LangGraph', 'Node.js', 'Kafka', 'Redis', 'TypeScript'],
     link: 'https://github.com/sunny-dev007',
   },
   {
@@ -303,6 +350,8 @@ export const projects: Project[] = [
       'Hybrid query routing: graph traversal vs. vector search',
       'Multi-hop reasoning with explainable evidence paths',
     ],
+    tradeoff:
+      'Graph construction is expensive and lags fresh data — worth it only for multi-hop questions, so the router sends single-hop queries straight to vector search.',
     stack: ['Knowledge Graph', 'Embeddings', 'Python', 'Azure OpenAI', 'Qdrant'],
     link: 'https://github.com/sunny-dev007',
   },
@@ -322,6 +371,8 @@ export const projects: Project[] = [
       'API Gateway routing, authentication, and rate limiting',
       'Fault tolerance: retries, circuit breakers, monitoring; horizontal scaling + DB partitioning',
     ],
+    tradeoff:
+      'Kafka-based async workflows over synchronous REST chains — eventual consistency to reason about, in exchange for graceful degradation under peak load.',
     stack: ['Node.js', 'React.js', 'Kafka', 'Redis', 'AWS', 'Azure', 'MySQL'],
     link: 'https://github.com/sunny-dev007',
   },
@@ -336,9 +387,19 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Generative AI & LLM',
     skills: [
-      'Azure OpenAI', 'OpenAI', 'LLM Architecture', 'Prompt Engineering',
-      'Enterprise RAG', 'Graph RAG', 'Hybrid Retrieval', 'Embeddings',
-      'Agentic AI', 'LangChain', 'MCP', 'LLM Evaluation & Guardrails',
+      'Azure OpenAI', 'AWS Bedrock', 'Google Gemini', 'OpenAI', 'LLM Architecture',
+      'Prompt Engineering', 'Enterprise RAG', 'Graph RAG', 'Hybrid Retrieval',
+      'Embeddings', 'Agentic AI', 'LangChain', 'LangGraph', 'MCP',
+      'LLM Evaluation & Guardrails', 'Multi-LLM Routing',
+    ],
+  },
+  {
+    title: 'Responsible AI, Security & Governance',
+    skills: [
+      'Responsible AI', 'NIST AI RMF', 'EU AI Act', 'ISO/IEC 42001',
+      'OWASP LLM Top 10', 'Prompt-Injection Defense', 'AI Red-Teaming',
+      'PII / PHI Protection', 'Bias & Hallucination Evals', 'Model Cards',
+      'LLM Observability (OpenTelemetry)', 'Cost Governance',
     ],
   },
   {

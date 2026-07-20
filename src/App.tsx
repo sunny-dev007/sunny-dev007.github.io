@@ -288,6 +288,12 @@ function Projects() {
                     <li key={a}>· {a}</li>
                   ))}
                 </ul>
+                {p.tradeoff && (
+                  <div className="tradeoff">
+                    <span className="tradeoff-label">⚖ Architect&apos;s Trade-off</span>
+                    {p.tradeoff}
+                  </div>
+                )}
                 <div className="tags">
                   {p.stack.map((t) => (
                     <span className="tag" key={t}>{t}</span>

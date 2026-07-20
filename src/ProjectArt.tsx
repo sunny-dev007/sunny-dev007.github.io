@@ -28,6 +28,7 @@ const palettes: Record<ProjectArtVariant, Palette> = {
   agents:  { from: '#3b0764', to: '#0b1020', accent: '#d8b4fe', soft: '#22d3ee' },
   graph:   { from: '#164e63', to: '#0b1020', accent: '#22d3ee', soft: '#a78bfa' },
   events:  { from: '#431407', to: '#0b1020', accent: '#fb923c', soft: '#fbbf24' },
+  security:{ from: '#4c0519', to: '#0b1020', accent: '#fb7185', soft: '#5eead4' },
 }
 
 function Chip({ x, y, w, label }: { x: number; y: number; w: number; label: string; p: Palette }) {
@@ -249,6 +250,41 @@ function Scene({ v, p }: { v: ProjectArtVariant; p: Palette }) {
           <Chip x={64} y={132} w={112} label="community A" p={p} />
           <Chip x={296} y={128} w={104} label="community B" p={p} />
           <Chip x={188} y={22} w={104} label="multi-hop query" p={p} />
+        </>
+      )
+    case 'security':
+      return (
+        <>
+          {/* firewall wall */}
+          {[0, 1, 2, 3].map((row) => (
+            <g key={row}>
+              {[0, 1, 2].map((col) => (
+                <rect key={col} x={168 + (row % 2 ? 22 : 0) + col * 44} y={40 + row * 24}
+                  width={40} height={20} rx={3}
+                  fill="rgba(251,113,133,0.14)" stroke={p.accent} strokeWidth="0.9" opacity="0.85" />
+              ))}
+            </g>
+          ))}
+          {/* allowed packet (teal) passes above wall */}
+          <path className="pa-line dashed" d="M 36 50 H 160" stroke={p.soft} />
+          <circle r={4} fill={p.soft}>
+            <animateMotion dur="2.6s" repeatCount="indefinite" path="M 36 50 H 300 H 430" />
+          </circle>
+          {/* blocked packet (red) stops at wall */}
+          <path className="pa-line dashed" d="M 36 116 H 160" stroke={p.accent} />
+          <circle r={4} fill={p.accent}>
+            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 36 116 H 156" />
+          </circle>
+          <text x={148} y={104} className="pa-big" fill={p.accent}>✕</text>
+          {/* shield on the right */}
+          <path d="M 396 44 l 26 10 v 20 c 0 18 -11 28 -26 35 c -15 -7 -26 -17 -26 -35 v -20 z"
+            fill="rgba(94,234,212,0.08)" stroke={p.soft} strokeWidth="1.5" />
+          <path d="M 387 78 l 7 7 l 14 -15" fill="none" stroke={p.soft} strokeWidth="2.4" strokeLinecap="round" />
+          <Chip x={30} y={22} w={104} label="prompt traffic" p={p} />
+          <Chip x={30} y={138} w={128} label="injection blocked ✕" p={p} />
+          <Chip x={196} y={140} w={100} label="NIST AI RMF" p={p} />
+          <Chip x={310} y={140} w={86} label="EU AI Act" p={p} />
+          <Chip x={318} y={22} w={110} label="red-team ✓ evals" p={p} />
         </>
       )
     case 'events':
