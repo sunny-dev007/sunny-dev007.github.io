@@ -516,7 +516,7 @@ export const achievements: Achievement[] = [
  * Leave empty ('') and all tracking is disabled — zero scripts loaded.
  */
 export const analyticsConfig = {
-  gaMeasurementId: '',
+  gaMeasurementId: 'G-YPWB30Y0TF',
 }
 
 export const contact = {
