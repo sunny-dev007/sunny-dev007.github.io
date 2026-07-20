@@ -12,7 +12,7 @@ export const profile = {
   location: 'Pune, India',
   /** Drop your photo at portfolio/public/profile.jpg (this path). */
   photo: './profile.jpg',
-  email: 'sunny.kush2k8@gmail.com',
+  email: 'kushwaha.sunny2602@gmail.com',
   github: 'https://github.com/sunny-dev007',
   githubUser: 'sunny-dev007',
   linkedin: 'https://www.linkedin.com/in/sunny-kushwaha-genai',
